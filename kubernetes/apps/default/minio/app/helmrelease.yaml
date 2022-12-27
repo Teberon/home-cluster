@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minio
+  name: &app minio
   namespace: default
 spec:
   interval: 15m
@@ -30,9 +30,9 @@ spec:
       repository: quay.io/minio/minio
       tag: RELEASE.2022-12-12T19-27-27Z
     env:
-      TZ: Europe/Warsaw
+      TZ: ${TIMEZONE}
       MINIO_UPDATE: "off"
-#      MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+      MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
       MINIO_PROMETHEUS_JOB_ID: minio
       MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
       MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
