@@ -22,6 +22,7 @@ spec:
       tag: v7.2.95
 
     env:
+      TZ: "${TIMEZONE}"
       RUNAS_UID0: "false"
       UNIFI_UID: "999"
       UNIFI_GID: "999"
